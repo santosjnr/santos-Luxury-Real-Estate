@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How It Works | Luxury Real Estate DApp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            color: #fff;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: -1;
+        }
+
+        nav {
+            background: rgba(10, 15, 36, 0.9);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .nav-links a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                background-color: rgba(10, 15, 36, 0.98);
+                width: 100%;
+                display: none;
+                padding: 1rem 0;
+                align-items: center;
+                /* ✅ Center items horizontally */
+                text-align: center;
+                /* ✅ Center text */
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        header {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            color: #ffd700;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            color: #ddd;
+        }
+
+        section {
+            padding: 3rem 1rem;
+        }
+
+        .section-container {
+            max-width: 1100px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .section-container h2 {
+            font-size: 2.2rem;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-container p.description {
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .step {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            flex: 1 1 280px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step i {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .step h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .step p {
+            font-size: 0.95rem;
+            color: #ddd;
+        }
+
+        footer {
+            background: rgba(10, 15, 36, 0.95);
+            color: #ccc;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">Luxury Real Estate</div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="home.html">Home</a>
+            <a href="Properties.html">Listings</a>
+
+
+            <!-- <a href="#">Connect Wallet</a> -->
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1><i class="fas fa-gem"></i> How It Works</h1>
+        <p>Experience the future of luxury real estate powered by blockchain technology</p>
+    </header>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works">
+        <div class="section-container">
+            <h2>Buying & Selling with Confidence</h2>
+            <p class="description">Your step-by-step guide to exploring, purchasing, and listing luxury real estate
+                using Web3 tools and secure smart contracts.</p>
+
+            <div class="steps">
+                <div class="step">
+                    <i class="fas fa-search-location"></i>
+                    <h3>1. Explore Verified Listings</h3>
+                    <p>Browse high-end properties worldwide. Filter by region, price, and asset type (villa, penthouse,
+                        private island).</p>
+                </div>
+
+                <div class="step">
+                    <i class="fas fa-wallet"></i>
+                    <h3>2. Connect Your Wallet</h3>
+                    <p>Securely connect your crypto wallet (e.g., MetaMask). No signups or passwords required.</p>
+                </div>
+
+                <div class="step">
+                    <i class="fas fa-landmark"></i>
+                    <h3>3. Buy via Smart Contract</h3>
+                    <p>Each listing is tokenized as an NFT. You purchase property ownership on-chain using ETH or
+                        stablecoins.</p>
+                </div>
+
+                <div class="step">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>4. Ownership Recorded on Blockchain</h3>
+                    <p>Your ownership is secured and visible on the Ethereum blockchain — tamper-proof and verifiable.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <i class="fas fa-upload"></i>
+                    <h3>5. List Your Property</h3>
+                    <p>Own a luxury property? Tokenize and list it for sale or fractional ownership directly from your
+                        wallet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Luxury Real Estate DApp — Built on Ethereum. All rights reserved.
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById("navLinks");
+            nav.classList.toggle("active");
+        }
+    </script>
+
+</body>
+
+</html>

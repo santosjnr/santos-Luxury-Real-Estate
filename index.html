@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luxury Real Estate DApp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        /* Navbar */
+        header {
+            background-color: #12122a;
+            padding: 1rem 2rem;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6600;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            background-color: #ff6600;
+            color: #fff;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 2px solid #ff6600;
+            color: #ff6600;
+            padding: 0.4rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .menu-toggle:hover {
+            background-color: #ff6600;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #1a1a2e;
+                margin-top: 1rem;
+                border-top: 1px solid #333;
+                padding: 1rem 0;
+                animation: fadeIn 0.3s ease-in-out;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scaleY(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            color: white;
+            height: 90vh;
+            text-align: center;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .hero h2,
+        .hero p,
+        .hero button {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+
+        .hero button {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .hero button a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .hero button:hover {
+            background-color: #e65c00;
+        }
+
+        /* Features */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 4rem 2rem;
+            background-color: #ffffff;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .feature-box {
+            flex: 1 1 250px;
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-box h3 {
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+        }
+
+        /* More Content */
+        .more-content {
+            padding: 4rem 2rem;
+            background-color: #e6e9f0;
+            text-align: center;
+        }
+
+        .more-content h2 {
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+        }
+
+        .more-content p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: #f4f4f9;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .testimonial {
+            max-width: 250px;
+            margin: 1rem auto;
+        }
+
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonial p {
+            font-style: italic;
+        }
+
+        /* Partners */
+        .partners {
+            background: #ffffff;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .partners-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .partners-logos img {
+            max-height: 50px;
+            object-fit: contain;
+        }
+
+        /* FAQ */
+        .faq-section {
+            background-color: #f0f2f5;
+            padding: 3rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .faq-question {
+            background-color: #fff;
+            cursor: pointer;
+            padding: 1rem;
+            font-weight: bold;
+        }
+
+        .faq-answer {
+            padding: 0 1rem 1rem;
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a2e;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="nav-container">
+            <h1>Luxury Real Estate</h1>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        </div>
+        <nav id="navbar">
+            <a href="./Register.html">Login</a>
+            <a href="./Properties.html">Properties</a>
+            <a href="./work.html">How It Works</a>
+            <a href="./contact.html">Contact Us</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Invest in Gold-Backed Real Estate Assets</h2>
+        <p>Buy, trade, and earn with secure blockchain-based property investments. Accessible, trustworthy, and scalable
+            for the modern investor.</p>
+        <button><a href="./Register.html">Get Started</a></button>
+    </section>
+
+    <section class="features">
+        <div class="feature-box">
+            <h3>Luxury Buildings</h3>
+            <p>Top-tier apartments, villas, and smart homes in global cities.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Gold Vaults</h3>
+            <p>Tokenized gold reserves secured and insured.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Monthly Returns</h3>
+            <p>Earn consistent passive income from tenant rentals and profits.</p>
+        </div>
+    </section>
+
+    <section class="more-content">
+        <h2>Why Choose Our Platform?</h2>
+        <p>
+            Our decentralized investment platform bridges the gap between traditional luxury assets and modern DeFi
+            technologies. From fractional ownership to automated smart contract governance, every element is designed to
+            ensure trust, transparency, and profitability for our global community of investors.
+        </p>
+    </section>
+
+    <section class="testimonials">
+        <h2>Client Testimonials</h2>
+        <div class="testimonial">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client 1" />
+            <p>“This platform changed the way I invest in real estate. Simple and secure.”</p>
+            <strong>- Ada B.</strong>
+        </div>
+        <div class="testimonial">
+            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Client 2" />
+            <p>“Gold and real estate in one investment? Genius!”</p>
+            <strong>- Kingsley O.</strong>
+        </div>
+    </section>
+
+    <section class="partners">
+        <h2>Trusted Partners</h2>
+        <div class="partners-logos">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
+
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">What is tokenized real estate?</div>
+            <div class="faq-answer">Tokenized real estate refers to dividing real property into digital tokens for
+                investment and trading on blockchain platforms.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">How do I earn monthly returns?</div>
+            <div class="faq-answer">You earn returns from rental income distributed proportionally to your share of
+                ownership each month.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">Is this platform regulated?</div>
+            <div class="faq-answer">We work with licensed custodians and follow DeFi transparency practices to ensure
+                investor protection.</div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Luxury Real Estate DApp. All rights reserved.</p>
+        <p>Powered by Santos Smart Contracts</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("navbar").classList.toggle("active");
+        }
+
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            answer.style.display = answer.style.display === "block" ? "none" : "block";
+        }
+    </script>
+</body>
+
+</html>

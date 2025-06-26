@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | Luxury Real Estate DApp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            font-family: 'Segoe UI', sans-serif;
+            color: #fff;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: -1;
+        }
+
+        nav {
+            background: rgba(10, 15, 36, 0.9);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color .2s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                background: rgba(10, 15, 36, 0.95);
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                display: none;
+                align-items: center;
+                padding: 1rem 0;
+                z-index: 99;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+        }
+
+        .contact-container {
+            flex: 1;
+            max-width: 700px;
+            margin: 3rem auto 1rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-container h2 {
+            text-align: center;
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-container p {
+            text-align: center;
+            color: #ddd;
+            margin-bottom: 2rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 0.8rem;
+            border: none;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background: #ffd700;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .3s;
+        }
+
+        .contact-form button:hover {
+            background: #e6c200;
+        }
+
+        .extras {
+            max-width: 700px;
+            margin: 2rem auto;
+            color: #eee;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(6px);
+        }
+
+        .extras h3 {
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        .extras p,
+        .extras li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .map {
+            margin-top: 1.5rem;
+            border: 2px solid #ffd700;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        footer {
+            background: rgba(10, 15, 36, 0.95);
+            color: #ccc;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">Luxury Real Estate</div>
+        <div class="menu-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="Register.html">Login</a>
+            <a href="Properties.html">Listings</a>
+            <a href="work.html">How It Works</a>
+            
+        </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <section id="contact-us" class="contact-container">
+        <h2>Contact Us</h2>
+        <p>We're here to assist with your real estate investments, smart contracts or DApp integration.</p>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <input type="text" placeholder="Subject">
+            <textarea rows="6" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Extras -->
+    <div class="extras">
+        <h3>Our Office</h3>
+        <p>📍 23 Luxury Lane, Banana Island, Lagos, Nigeria</p>
+        <p>📞 +234 800 000 0000</p>
+        <p>📧 support@luxurydapp.com</p>
+
+        <h3 style="margin-top: 2rem;">FAQs</h3>
+        <ul>
+            <li><strong>Q:</strong> How can I list a property?</li>
+            <li><strong>A:</strong> Connect your wallet and click “Add Listing”.</li>
+            <li><strong>Q:</strong> Do you accept payments in ETH?</li>
+            <li><strong>A:</strong> Yes! ETH is supported via our secure smart contract.</li>
+        </ul>
+
+        <div class="map">
+            <iframe src="https://maps.google.com/maps?q=banana%20island%20lagos&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                width="100%" height="250" style="border:0;" allowfullscreen loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Luxury Real Estate DApp. Built with Ethereum & ❤️. All rights reserved.
+    </footer>
+
+    <script>
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+    </script>
+</body>
+
+</html>

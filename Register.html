@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register / Login | Luxury Real Estate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #121421;
+            color: #fff;
+        }
+
+        header {
+            background-color: #0b0e1a;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            border-bottom: 1px solid #1f1f3a;
+        }
+
+        .header-left {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: bold;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.7rem;
+            background: none;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.4rem 0.6rem;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #1e2540;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 1rem;
+                background-color: #0b0e1a;
+                border-top: 1px solid #1f1f3a;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            nav a {
+                padding: 0.75rem 1rem;
+                width: 100%;
+            }
+        }
+
+        .auth-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 1rem;
+        }
+
+        .auth-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-title h2 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .auth-title p {
+            font-size: 1rem;
+            margin: 0.5rem 0 2rem;
+            color: #f0f0f0;
+        }
+
+        .auth-container {
+            max-width: 400px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+
+        .tabs button {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            font-weight: bold;
+            color: #fff;
+            transition: background 0.3s;
+        }
+
+        .tabs button.active {
+            background: #0b3d91;
+        }
+
+        form {
+            display: none;
+            flex-direction: column;
+        }
+
+        form.active {
+            display: flex;
+        }
+
+        form input {
+            padding: 0.7rem;
+            margin: 0.5rem 0;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        form button {
+            background-color: #0b3d91;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        form button:hover {
+            background-color: #094080;
+        }
+
+        .forgot {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+
+        .forgot a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .status {
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .auth-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo">Luxury Real Estate</div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        </div>
+        <nav id="navMenu">
+            <a href="index.html">Home</a>
+            <a href="Properties.html">Properties</a>
+            <a href="work.html">How It Works</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="auth-wrapper">
+        <div class="auth-title">
+            <h2>Welcome to Luxury Real Estate</h2>
+            <p>Login or register to explore premium blockchain-powered properties.</p>
+        </div>
+
+        <div class="auth-container">
+            <div class="tabs">
+                <button class="active" onclick="switchForm('register')">Register</button>
+                <button onclick="switchForm('login')">Login</button>
+            </div>
+
+            <form id="registerForm" class="active">
+                <input type="text" id="regName" placeholder="Full Name" required />
+                <input type="email" id="regEmail" placeholder="Email Address" required />
+                <input type="password" id="regPassword" placeholder="Password" required />
+                <button type="button" onclick="registerUser()">Register</button>
+            </form>
+
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Email Address" required />
+                <input type="password" id="loginPassword" placeholder="Password" required />
+                <div class="forgot"><a href="forgot-password.html">Forgot password?</a></div>
+                <button type="button" onclick="loginUser()">Login</button>
+            </form>
+
+            <div class="status" id="statusText"></div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navMenu');
+            nav.classList.toggle('active');
+        }
+
+        function switchForm(form) {
+            document.getElementById('registerForm').classList.remove('active');
+            document.getElementById('loginForm').classList.remove('active');
+            document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+
+            if (form === 'register') {
+                document.getElementById('registerForm').classList.add('active');
+                document.querySelector('.tabs button:nth-child(1)').classList.add('active');
+            } else {
+                document.getElementById('loginForm').classList.add('active');
+                document.querySelector('.tabs button:nth-child(2)').classList.add('active');
+            }
+        }
+
+        function registerUser() {
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            if (name && email && password) {
+                document.getElementById('statusText').textContent = 'Registering...';
+                setTimeout(() => {
+                    document.getElementById('statusText').textContent = 'Registration successful!';
+                }, 1000);
+            } else {
+                document.getElementById('statusText').textContent = 'Please fill all fields.';
+            }
+        }
+
+        function loginUser() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (email && password) {
+                document.getElementById('statusText').textContent = 'Logging in...';
+                setTimeout(() => {
+                    document.getElementById('statusText').textContent = 'Login successful!';
+                }, 1000);
+            } else {
+                document.getElementById('statusText').textContent = 'Please fill all fields.';
+            }
+        }
+    </script>
+</body>
+
+</html>

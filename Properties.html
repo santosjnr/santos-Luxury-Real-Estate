@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luxury Real Estate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #111827;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        nav {
+            background-color: #1e3a8a;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: #1e3a8a;
+                flex-direction: column;
+                width: 100%;
+                display: none;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                text-align: center;
+                padding: 1rem 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .filter-bar {
+            background: #1f2937;
+            padding: 1rem;
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .filter-bar input,
+        .filter-bar select,
+        .filter-bar button {
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            border: none;
+            min-width: 160px;
+            font-size: 1rem;
+        }
+
+        .filter-bar button {
+            background: #3b82f6;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: #1e293b;
+            color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1rem;
+        }
+
+        .price {
+            font-weight: bold;
+            margin: 0.5rem 0;
+            color: #ffd700;
+        }
+
+        .view-btn {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .view-btn:hover {
+            background-color: #ffd700;
+            color: #111827;
+        }
+
+        .pagination {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .pagination button {
+            margin: 0 5px;
+            padding: 0.5rem 1rem;
+            border: none;
+            background: #1e3a8a;
+            color: #fff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Luxury Real Estate</div>
+        <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        <ul id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="work.html">How it Works</a></li>
+
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="filter-bar">
+            <input type="text" id="searchQuery" placeholder="Search by keyword" />
+            <select id="filterCategory">
+                <option value="">All Categories</option>
+                <option value="houses">Houses</option>
+                <option value="cars">Cars</option>
+                <option value="planes">Planes</option>
+                <option value="pets">Pets</option>
+                <option value="gold">Gold</option>
+            </select>
+            <select id="filterLocation">
+                <option value="">Location</option>
+                <option value="dubai">Dubai</option>
+                <option value="usa">USA</option>
+                <option value="nigeria">Nigeria</option>
+            </select>
+            <button onclick="searchImages()">Search</button>
+        </div>
+
+        <div class="grid" id="listingsGrid"></div>
+        <div class="pagination" id="pagination"></div>
+    </div>
+
+    <script>
+        const ACCESS_KEY = 'MRH0_Gtv6xe75FTbIpZTxlJL6mLtmFvLO47cpekMU6E';
+        let listings = [];
+        const listingsPerPage = 12;
+        let currentPage = 1;
+
+        async function fetchImages(query = "luxury") {
+            const url = `https://api.unsplash.com/search/photos?query=${query}&per_page=50&client_id=${ACCESS_KEY}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            return data.results.map(item => ({
+                name: item.alt_description || "Luxury Item",
+                img: item.urls.regular,
+                category: "real estate",
+                eth: (Math.random() * 20 + 1).toFixed(2),
+                usdt: (Math.random() * 100000 + 5000).toFixed(2),
+            }));
+        }
+
+        function renderListings(data) {
+            const grid = document.getElementById("listingsGrid");
+            grid.innerHTML = "";
+            const start = (currentPage - 1) * listingsPerPage;
+            const paginated = data.slice(start, start + listingsPerPage);
+
+            for (const item of paginated) {
+                grid.innerHTML += `
+        <div class="card">
+          <img src="${item.img}" alt="${item.name}">
+          <div class="card-content">
+            <h3>${item.name}</h3>
+            <p class="price">Ξ ${item.eth} ETH | 💲${item.usdt} USDT</p>
+            <button class="view-btn" onclick="alert('View Details')">View Details</button>
+          </div>
+        </div>
+      `;
+            }
+
+            renderPagination(data.length);
+        }
+
+        function renderPagination(total) {
+            const pageCount = Math.ceil(total / listingsPerPage);
+            const pagination = document.getElementById("pagination");
+            pagination.innerHTML = "";
+
+            for (let i = 1; i <= pageCount; i++) {
+                pagination.innerHTML += `<button onclick="goToPage(${i})">${i}</button>`;
+            }
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            renderListings(listings);
+        }
+
+        async function searchImages() {
+            const query = document.getElementById("searchQuery").value || "luxury";
+            listings = await fetchImages(query);
+            renderListings(listings);
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById("nav-links");
+            menu.classList.toggle("show");
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            listings = await fetchImages();
+            renderListings(listings);
+        });
+    </script>
+</body>
+
+</html>
